@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
  * Fahrkartenautomat Übungsprojekt
  * @author Marcus Hadelko
- * @version A2.5 Fahrkartenautomat kommentieren
+ * @version A3.5 Fehlerbeseitigung
  */
 class Fahrkartenautomat {
 	public static void main(String[] args) {
@@ -21,10 +21,7 @@ class Fahrkartenautomat {
 		System.out.print("Zu zahlender Betrag (Euro): ");
 		zuZahlenderBetrag = tastatur.nextDouble();
 
-		/* 
-		 * …
-		 * A3.4 Anzahl der Tickets hinzufügen 
-		 */
+		// Anzahl der Tickets
 		System.out.print("Anzahl der Tickets: ");
 		int anzahlTickets = tastatur.nextInt();
 		
@@ -34,7 +31,7 @@ class Fahrkartenautomat {
 		nochZuZahlen = 0.0;
 		while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
 			nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
-			System.out.println("Noch zu zahlen: " + nochZuZahlen);
+			System.out.printf("Noch zu zahlen: %.2f Euro%n ", nochZuZahlen);
 			System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
 			eingeworfeneMuenze = tastatur.nextDouble();
 			eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
@@ -53,38 +50,58 @@ class Fahrkartenautomat {
 		}
 		System.out.println("\n\n");
 		
-		// 4 Rückgeldberechnung und -ausgabe
-		rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
-		if (rueckgabebetrag > 0.0) {
-			System.out.println("Der Rückgabebetrag in Höhe von " + rueckgabebetrag + " Euro");
-			System.out.println("wird in folgenden Münzen ausgezahlt:");
+//		// 4 Rückgeldberechnung und -ausgabe <- Alt
+//		rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
+//		if (rueckgabebetrag > 0.0) {
+//			System.out.printf("Der Rückgabebetrag in Höhe von %.2f Euro%n", rueckgabebetrag);
+//			System.out.println("wird in folgenden Münzen ausgezahlt:");
+//
+//			while (rueckgabebetrag >= 2.0) { // 2-Euro-Münzen
+//				System.out.println("2 Euro");
+//				rueckgabebetrag = rueckgabebetrag - 2.0;
+//			}
+//			while (rueckgabebetrag >= 1.0) { // 1-Euro-Münzen
+//				System.out.println("1 Euro");
+//				rueckgabebetrag = rueckgabebetrag - 1.0;
+//			}
+//			while (rueckgabebetrag >= 0.5) { // 50-Cent-Münzen
+//				System.out.println("50 Cent");
+//				rueckgabebetrag = rueckgabebetrag - 0.5;
+//			}
+//			while (rueckgabebetrag >= 0.2) { // 20-Cent-Münzen
+//				System.out.println("20 Cent");
+//				rueckgabebetrag = rueckgabebetrag - 0.2;
+//			}
+//			while (rueckgabebetrag >= 0.1) { // 10-Cent-Münzen
+//				System.out.println("10 Cent");
+//				rueckgabebetrag = rueckgabebetrag - 0.1;
+//			}
+//			while (rueckgabebetrag >= 0.05) { // 5-Cent-Münzen
+//				System.out.println("5 Cent");
+//				rueckgabebetrag = rueckgabebetrag - 0.05;
+//			}
+//		}
+		
+		// 4 Rückgeldberechnung Neu
+		int rueckgabeCent = (int) Math.round((eingezahlterGesamtbetrag - zuZahlenderBetrag) * 100);
+		
+		if (rueckgabeCent > 0) {
+		    System.out.printf("Der Rückgabebetrag in Höhe von %.2f Euro%n", rueckgabeCent / 100.0);
+		    System.out.println("wird in folgenden Münzen ausgezahlt:");
 
-			while (rueckgabebetrag >= 2.0) { // 2-Euro-Münzen
-				System.out.println("2 Euro");
-				rueckgabebetrag = rueckgabebetrag - 2.0;
-			}
-			while (rueckgabebetrag >= 1.0) { // 1-Euro-Münzen
-				System.out.println("1 Euro");
-				rueckgabebetrag = rueckgabebetrag - 1.0;
-			}
-			while (rueckgabebetrag >= 0.5) { // 50-Cent-Münzen
-				System.out.println("50 Cent");
-				rueckgabebetrag = rueckgabebetrag - 0.5;
-			}
-			while (rueckgabebetrag >= 0.2) { // 20-Cent-Münzen
-				System.out.println("20 Cent");
-				rueckgabebetrag = rueckgabebetrag - 0.2;
-			}
-			while (rueckgabebetrag >= 0.1) { // 10-Cent-Münzen
-				System.out.println("10 Cent");
-				rueckgabebetrag = rueckgabebetrag - 0.1;
-			}
-			while (rueckgabebetrag >= 0.05) { // 5-Cent-Münzen
-				System.out.println("5 Cent");
-				rueckgabebetrag = rueckgabebetrag - 0.05;
-			}
+		    while (rueckgabeCent >= 200) { 
+		    	System.out.println("2 Euro");  rueckgabeCent -= 200; }
+		    while (rueckgabeCent >= 100) { 
+		    	System.out.println("1 Euro");  rueckgabeCent -= 100; }
+		    while (rueckgabeCent >= 50)  { 
+		    	System.out.println("50 Cent"); rueckgabeCent -= 50; }
+		    while (rueckgabeCent >= 20)  { 
+		    	System.out.println("20 Cent"); rueckgabeCent -= 20; }
+		    while (rueckgabeCent >= 10)  { 
+		    	System.out.println("10 Cent"); rueckgabeCent -= 10; }
+		    while (rueckgabeCent >= 5)   { 
+		    	System.out.println("5 Cent");  rueckgabeCent -= 5; }
 		}
-
 		
 		System.out.println("\nVergessen Sie nicht, den Fahrschein\n" + "vor Fahrtantritt entwerten zu lassen!\n"
 				+ "Wir wünschen Ihnen eine gute Fahrt.");
