@@ -14,7 +14,7 @@ class Fahrkartenautomat {
 		double zuZahlenderBetrag;
 		double eingezahlterGesamtbetrag;
 		double eingeworfeneMuenze;
-		double rueckgabebetrag;
+//		double rueckgabebetrag;
 		double nochZuZahlen;
 
 		// 1 Geldbetrag eingeben
