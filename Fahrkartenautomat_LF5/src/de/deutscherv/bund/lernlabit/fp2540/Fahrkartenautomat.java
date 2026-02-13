@@ -21,9 +21,15 @@ class Fahrkartenautomat {
 		System.out.print("Zu zahlender Betrag (Euro): ");
 		zuZahlenderBetrag = tastatur.nextDouble();
 
-		
+		/* 
+		 * …
+		 * A3.4 Anzahl der Tickets hinzufügen 
+		 */
+		System.out.print("Anzahl der Tickets: ");
+		int anzahlTickets = tastatur.nextInt();
 		
 		// 2 Geldeinwurf
+		zuZahlenderBetrag = zuZahlenderBetrag * anzahlTickets;
 		eingezahlterGesamtbetrag = 0.0;
 		nochZuZahlen = 0.0;
 		while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
