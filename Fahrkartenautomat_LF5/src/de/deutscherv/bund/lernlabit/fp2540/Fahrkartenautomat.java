@@ -21,6 +21,8 @@ class Fahrkartenautomat {
 		System.out.print("Zu zahlender Betrag (Euro): ");
 		zuZahlenderBetrag = tastatur.nextDouble();
 
+		
+		
 		// 2 Geldeinwurf
 		eingezahlterGesamtbetrag = 0.0;
 		nochZuZahlen = 0.0;
